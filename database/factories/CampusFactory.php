@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Roles>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Campus>
  */
-class RolesFactory extends Factory
+class CampusFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,6 @@ class RolesFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'description' => $this->faker->word,
             'created_at' => now(),
             'updated_at' => null,
         ];

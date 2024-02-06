@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->date('dob')->nullable();
             $table->enum('document_type', ['DNI', 'PASSPORT']);
-            $table->string('document_number');
+            $table->string('document_number')->unique();
             $table->string('phone_prefix')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->unique();

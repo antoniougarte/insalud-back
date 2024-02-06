@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -46,17 +49,19 @@ class AuthController extends Controller
             // la clase auth permite acceder a los datos del usuario que se encuentra logueado
             // Auth::user()->email con este ejemplo accedemos al email del usuario
             // con auth attemp tratamos de loguear a nuestro usuario
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if(!Auth::attempt($request->only(['document_number', 'password']))){
                 return response ()->json([
                     'status' => false,
                     'message' => 'email o password no coincide con nuestros registros'
                 ], 401);
             };
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('document_number', $request->document_number)->first();
+            // Generamos un token JWT para el usuario
+            $token = $user->createToken("API_TOKEN")->plainTextToken;
             return response ()->json([
                 'status' => true,
                 'message' => 'usuario logueado succefuly',
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'token' => $token
             ],200);
         } catch (\Exception $e) {
             return response()->json([
@@ -65,4 +70,17 @@ class AuthController extends Controller
             ], $e->getCode() ?: 500);
         }
     }
+
+    public function getUser(Request $request)
+    {
+        try {
+            $userId = $request->user()->id;
+            $results = DB::select('CALL sp_get_current_user(?)', [$userId]);
+    
+            return response()->json($results);
+        } catch (QueryException $e) {
+            return response()->json(['error' => 'Error al obtener el usuario'], 500);
+        }
+    }
+
 }

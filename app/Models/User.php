@@ -50,8 +50,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    
     public function role()
     {
         return $this->belongsTo(Roles::class);
+    }
+    public function campus()
+    {
+        return $this->belongsTo(Campus::class);
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

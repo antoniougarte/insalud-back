@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Campus;
 use App\Models\Roles;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -29,14 +30,17 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName,
             'dob' => $this->faker->date,
             'document_type' => $this->faker->randomElement(['DNI', 'PASSPORT']),
-            'document_number' => $this->faker->unique()->text(8),
+            'document_number' => $this->faker->unique()->numberBetween(10000000, 99999999),
             'phone_prefix' => $this->faker->optional()->randomNumber(2),
             'phone_number' => $this->faker->optional()->phoneNumber,
             'email' => $this->faker->unique()->safeEmail(),
             'role_id' => Roles::inRandomOrder()->first()->id,
-            'email_verified_at' => now(),
+            'campus_id' => Campus::inRandomOrder()->first()->id,
+            'email_verified_at' => null,
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' =>null,
+            'created_at' => now(),
+            'updated_at' => null,
         ];
     }
 
