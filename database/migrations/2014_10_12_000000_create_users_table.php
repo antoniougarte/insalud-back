@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('dob');
-            $table->string('document_type');
-            $table->string('phone');
+            $table->date('dob')->nullable();
+            $table->enum('document_type', ['DNI', 'PASSPORT']);
+            $table->string('document_number');
+            $table->string('phone_prefix')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('email')->unique();
+            $table->string('role_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
