@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\UserRelationship;
+use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(3)->create();
         // Llamar al factory UserRelationshipFactory
         UserRelationship::factory(3)->create();
+        UserRole::factory(3)->create(); // Corregir el nombre del modelo
+
 
         // \App\Models\Roles::factory()->create([
         //     'name' => 'Test User',

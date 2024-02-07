@@ -51,10 +51,10 @@ class User extends Authenticatable
     ];
 
     
-    public function role()
-    {
-        return $this->belongsTo(Roles::class);
-    }
+    // public function role()
+    // {
+    //     return $this->belongsTo(Roles::class);
+    // }
     public function campus()
     {
         return $this->belongsTo(Campus::class);
@@ -62,5 +62,9 @@ class User extends Authenticatable
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Roles::class, 'user_role');
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone_prefix')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->unique();
-            $table->string('role_id');
+            // $table->string('role_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

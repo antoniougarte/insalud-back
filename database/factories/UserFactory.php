@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'phone_prefix' => $this->faker->optional()->randomNumber(2),
             'phone_number' => $this->faker->optional()->phoneNumber,
             'email' => $this->faker->unique()->safeEmail(),
-            'role_id' => Roles::inRandomOrder()->first()->id,
+            // 'role_id' => Roles::inRandomOrder()->first()->id,
             'campus_id' => Campus::inRandomOrder()->first()->id,
             'email_verified_at' => null,
             'password' => static::$password ??= Hash::make('password'),
